@@ -1,0 +1,26 @@
+﻿<div>
+    <button onclick="TestBtn()">回傳patrialView</button>
+</div>
+
+<div>TOP</div>
+<div id="PartialDiv"></div>
+<div>BOTTOM</div>
+
+@Html.Hidden("TestViewUrl",Url.Action("TestViewToString", "Home"))
+@section scripts{
+    <script>
+        function TestBtn() {
+            $.ajax({
+                url: $('#TestViewUrl').val(),
+                type: "POST",
+                success: function (e) {
+                    $('#PartialDiv').html(e.TestView);
+                },
+                error: function (e) {
+                    console.log(e);
+                    alert(e);
+                }
+            })
+        }
+    </script>
+}
